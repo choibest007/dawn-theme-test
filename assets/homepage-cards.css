@@ -1,0 +1,106 @@
+@font-face {
+  font-family: "GT-display";
+  src: url({{ "GT-Super-Display-Medium.woff" | asset_url }}) format("woff");
+}
+
+@font-face {
+  font-family: "GT-text";
+  src: url({{ "GT-Super-Display-Medium.woff" | asset_url }}) format("woff");
+}
+
+.homepage-cards {
+  width: 100%;
+  max-width: 1400px;
+  margin: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.homepage-cards .heading {
+  font-family: 'GT-display';
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 1;
+  margin-bottom: 30px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.homepage-cards__list {
+  display: grid;
+  grid-template-columns: repeat(1,1fr);
+  row-gap: 10px;
+}
+
+.homepage-cards__item {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.homepage-cards__item img {
+  width: 100%;
+  height: fit-content;
+  max-height: 250px;
+  object-fit: cover;
+}
+
+.homepage-cards__item-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.homepage-cards__item-container .title {
+  font-family: 'GT-display';
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 32px;
+  margin-bottom: 10px;
+  margin-top: 25px;
+}
+
+.homepage-cards__item-container .content {
+  font-family: 'GT-text';
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.homepage-cards__item-container .content p {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.homepage-cards__item-container a {
+  border-bottom: 1px solid #000;
+  color: #000;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
+  font-family: 'Assistant';
+  text-transform: uppercase;
+  margin-bottom: 30px;
+}
+
+@media (min-width: 991px) {
+  .homepage-cards__list {
+    grid-template-columns: repeat(4,1fr);
+    column-gap: 10px;
+  }
+
+  .homepage-cards {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .homepage-cards .heading {
+    font-size: 80px;
+    margin-top: 0;
+    margin-bottom: 80px;
+  }
+}

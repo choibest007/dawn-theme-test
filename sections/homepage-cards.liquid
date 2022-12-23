@@ -1,0 +1,124 @@
+{{ 'homepage-cards.css' | asset_url | stylesheet_tag }}
+
+<div class="homepage-cards section-padding">
+  {% if section.settings.title != blank %}
+    <h3 class="heading">{{ section.settings.title }}</h3>
+  {% endif %}
+
+  <div class="container homepage-cards__list">
+    {% for block in section.blocks %}
+      <div class="homepage-cards__item" style="background-color: {{ block.settings.bg_color }};">
+        {%- capture sizes -%}(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px, (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2){%- endcapture -%}
+        {{ block.settings.image | image_url: width: 1500 | image_tag:
+          loading: 'lazy',
+          sizes: sizes,
+          widths: '165, 360, 535, 750, 1070, 1500'
+        }}
+
+        <div class="homepage-cards__item-container">
+          {% if block.settings.title != blank %}
+            <h3 class="title">{{ block.settings.title }}</h3>
+          {% endif %}
+
+          {% if block.settings.content != blank %}
+            <div class="content">{{ block.settings.content }}</div>
+          {% endif %}
+
+          {% if block.settings.button_text != blank and block.settings.button_link != blank %}
+            <a href="{{ block.settings.button_link }}">{{ block.settings.button_text }}</a>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  .homepage-cards.section-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Homepage Cards",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "HAVING FUN 101"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 40,
+      "unit": "px",
+      "label": "Padding Top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 40,
+      "unit": "px",
+      "label": "Padding Bottom"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "limit": 4,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color",
+          "default": "#fff"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Homepage Cards"
+    }
+  ]
+}
+{% endschema %}
